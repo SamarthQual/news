@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiBase: 'http://localhost:4000/api'
+  production: true,
+  apiBase: 'https://news-backend-jqk6.onrender.com/api'
 };
