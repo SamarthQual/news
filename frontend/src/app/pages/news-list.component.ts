@@ -67,7 +67,7 @@ interface EditState {
         <div style="min-width: 0; flex: 1;">
           <a [href]="a.url" target="_blank" rel="noopener" class="title">{{ a.title }}</a>
           <div class="meta">
-            <strong>{{ a.companyName }}</strong> · {{ a.source || 'unknown' }} ·
+            <!--<strong>{{ a.companyName }}</strong> · --><strong>{{ a.source || 'unknown' }}</strong> ·
             {{ a.publishedAt | date: 'medium' }}
           </div>
         </div>
