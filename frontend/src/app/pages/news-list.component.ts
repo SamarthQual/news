@@ -50,7 +50,7 @@ interface EditState {
             <option value="regulatory">Regulatory</option>
             <option value="competitive">Competitive</option>
             <option value="strategic">Strategic</option>
-            <option value="none">None</option>
+            <!--<option value="none">None</option>-->
           </select>
         </div>
         <div class="spacer"></div>
@@ -67,7 +67,7 @@ interface EditState {
         <div style="min-width: 0; flex: 1;">
           <a [href]="a.url" target="_blank" rel="noopener" class="title">{{ a.title }}</a>
           <div class="meta">
-            <!--<strong>{{ a.companyName }}</strong> · --><strong>{{ a.source || 'unknown' }}</strong> ·
+            <strong>{{ a.companyName }}</strong> · <strong>{{ a.source || 'unknown' }}</strong> ·
             {{ a.publishedAt | date: 'medium' }}
           </div>
         </div>
@@ -143,7 +143,7 @@ interface EditState {
               <option value="regulatory">Regulatory</option>
               <option value="competitive">Competitive</option>
               <option value="strategic">Strategic</option>
-              <option value="none">None</option>
+              <<!--<option value="none">None</option>-->
             </select>
           </div>
           <div>
