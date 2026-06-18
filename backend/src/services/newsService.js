@@ -11,7 +11,7 @@ function hashUrl(url) {
 }
 
 function buildQuery(company) {
-  const terms = [company.name, ...(company.aliases || []), ...(company.searchKeywords || [])]
+  const terms = [company.name]//, ...(company.aliases || []), ...(company.searchKeywords || [])]
     .filter(Boolean)
     .map((t) => `"${t.trim()}"`);
   if (!terms.length) return company.name;
