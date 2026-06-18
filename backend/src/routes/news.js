@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
     if (company) filter.company = company;
     if (impactLevel) filter['classification.impactLevel'] = impactLevel;
     if (riskType) filter['classification.riskType'] = riskType;
-    //if (!riskType) filter['classification.riskType'] = { $ne: 'none' };
+    if (!riskType) filter['classification.riskType'] = { $ne: 'none' };
     if (status) filter.classificationStatus = status;
     if (search) filter.title = { $regex: search, $options: 'i' };
 
@@ -34,20 +34,20 @@ router.get('/stats', async (req, res, next) => {
     const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const [byImpact, byRisk, byCompany, recentCount] = await Promise.all([
       NewsArticle.aggregate([
-        { $match: { classificationStatus: 'classified', /*publishedAt: { $gte: since }*/ } },
+        { $match: { classificationStatus: 'classified', "classification.riskType": {$ne: 'none'} /*publishedAt: { $gte: since }*/ } },
         { $group: { _id: '$classification.impactLevel', count: { $sum: 1 } } }
       ]),
       NewsArticle.aggregate([
-        { $match: { classificationStatus: 'classified', /*publishedAt: { $gte: since }*/ } },
+        { $match: { classificationStatus: 'classified', "classification.riskType": {$ne: 'none'} /*publishedAt: { $gte: since }*/ } },
         { $group: { _id: '$classification.riskType', count: { $sum: 1 } } }
       ]),
       NewsArticle.aggregate([
-        { $match: { /*publishedAt: { $gte: since }*/ } },
+        { $match: { "classification.riskType": {$ne: 'none'} /*publishedAt: { $gte: since }*/ } },
         { $group: { _id: '$companyName', count: { $sum: 1 } } },
         { $sort: { count: -1 } },
         { $limit: 10 }
       ]),
-      NewsArticle.countDocuments({ /*publishedAt: { $gte: since } "classification.riskType": {$ne: 'none'}*/ })
+      NewsArticle.countDocuments({ /*publishedAt: { $gte: since } */"classification.riskType": {$ne: 'none'} })
     ]);
 
     res.json({
